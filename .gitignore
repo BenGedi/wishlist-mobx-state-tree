@@ -12,6 +12,7 @@
 /build
 
 .history/
+/src/models/__snapshots__/
 
 # misc
 .DS_Store

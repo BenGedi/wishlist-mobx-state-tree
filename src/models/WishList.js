@@ -1,14 +1,42 @@
-import { types } from 'mobx-state-tree';
-
-const data = {
-    "name": "Chronicles of Narnia Box Set - C.S Lewis",
-    "price": 28.73,
-    "image": "http://t3.gstatic.com/images?q=tbn:ANd9GcRR8RtvlbILZwwijAbdrE8oo4wfpoC3gSFGxcoT9LvuHE6AlX5M"
-};
+import { types, getParent, destroy } from 'mobx-state-tree';
 
 // define the model types 
-export const wishListItem = types.model({
-    name: types.string,
-    price: types.number,
-    image: '', // equval to: types.optional(types.string, '')
-});
+export const WishListItem = types
+    .model({
+        name: types.string,
+        price: types.number,
+        image: '', // equval to: types.optional(types.string, '')
+    })
+    .actions(self => ({
+        changeName(newName) {
+            self.name = newName;
+        },
+        changePrice(newPrice) {
+            self.price = newPrice;
+        },
+        changeImage(newImage) {
+            self.image = newImage;
+        },
+        remove() {
+            // 2 is the defth of the child in the tree, so it needs to go 2 parents up
+            getParent(self, 2).remove(self);
+        }
+    }));
+
+export const WishList = types
+    .model({
+        items: types.optional(types.array(WishListItem), []),
+    })
+    .views(self => ({
+        get totalPrice() {
+            return self.items.reduce((sum, entry) => sum + entry.price, 0);
+        }
+    }))
+    .actions(self => ({
+        add(item) {
+            self.items.push(item);
+        },
+        remove(item) {
+            destroy(item); // ==> self.items.splice(self.items.indexOf(item), 1);
+        }
+    }));

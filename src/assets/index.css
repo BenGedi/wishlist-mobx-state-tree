@@ -1,0 +1,104 @@
+html, 
+body {
+    height: 100%;
+    background-color: #e7e7e7;
+}
+
+.App {
+    max-width: 457px;
+    text-align: center;
+    margin: auto;
+}
+
+.App-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.App-title {
+    color: #a91818;
+    text-decoration-line: underline;
+    font-family: 'Lemon', cursive;
+    margin-left: 30px;
+}
+
+.App-logo {
+    width: 90px;
+}
+
+.list {
+    text-align: center;
+}
+
+.list ul {
+    padding-left: 20px;
+}
+
+.item {
+    display: flex;
+    height: 76px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: white;
+    margin: 5px 0;
+    padding: 5px;
+    border-left: 3px solid #a91818;
+    box-shadow: 1px 1px 3px 1px rgba(189,189,189,1);
+}
+
+.item-image {
+    max-width: 43px;
+}
+
+.item img {
+    width: 100%;
+}
+
+.item h3 {
+    margin: 0px 11px 0px 12px;
+}
+
+.item span {
+    margin-left: auto;
+    align-self: flex-end;
+    font-size: small;
+}
+
+.item button {
+    padding: 0;
+    width: 21px;
+    margin-left: 5px;
+}
+
+.item-edit {
+    text-align: right;
+}
+
+.item-edit input {
+    color: #a91818;
+    flex: 2;
+    padding: 3px;
+}
+
+.item.edit-mode {
+    flex-direction: column;
+    height: initial;
+}
+
+.text-field {
+    display: flex;
+    margin: 3px 0;
+    align-items: center;
+}
+
+.text-field span {
+    margin-right: 7px;
+    width: 40px;
+    align-self: initial;
+}
+
+.action-buttons {
+    width: fit-content;
+    margin-left: auto;
+}
