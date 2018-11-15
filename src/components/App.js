@@ -18,9 +18,9 @@ class App extends Component {
 	}
 
 	render() {
-		const wishList = this.props.wishList;
-		const selectedUser = wishList.users.get(this.state.selectedUser);
-		const users = Object.values(toJS(wishList).users);
+		const group = this.props.group;
+		const selectedUser = group.users.get(this.state.selectedUser);
+		const users = Object.values(toJS(group).users);
 
 		return (
 			<div className="App">

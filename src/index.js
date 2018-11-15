@@ -5,7 +5,7 @@ import App from './components/App';
 import './assets/index.css';
 
 import { Group } from './models/Group';
-import { getSnapshot } from 'mobx-state-tree';
+import { getSnapshot, addMiddleware } from 'mobx-state-tree';
 
 let initialState = {
     users: {
@@ -39,10 +39,10 @@ let initialState = {
 
 // for Hot Modules Reloading when model definitions change
 
-let wishList = Group.create(initialState);
+let group = Group.create(initialState);
 
 function renderApp() {
-    ReactDOM.render(<App wishList={wishList} />, document.getElementById('root'));
+    ReactDOM.render(<App group={group} />, document.getElementById('root'));
 }
 
 renderApp();
@@ -55,9 +55,9 @@ if (module.hot) {
 
     module.hot.accept(['./models/WishList'], () => {
         // new model definitions
-        const snapshot = getSnapshot(wishList);
+        const snapshot = getSnapshot(group);
         // initial wishList with the new defenition of WishList model (which injected by webpack) based on the old snapshot
-        wishList = Group.create(snapshot);
+        group = Group.create(snapshot);
         renderApp();
     })
 }
