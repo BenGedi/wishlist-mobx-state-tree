@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { onSnapshot } from 'mobx-state-tree';
+
 import App from './components/App';
 import './assets/index.css';
 
 import { WishList } from './models/WishList';
+import { getSnapshot } from 'mobx-state-tree';
 
 let initialState = {
     items: [
@@ -20,21 +21,31 @@ let initialState = {
         }
     ]
 };
-const wishlistStorage = localStorage.getItem('wishlistapp');
 
-if (wishlistStorage) {
-    const json = JSON.parse(wishlistStorage);
-    // checking if json storage is matching our wishList model
-    if (WishList.is(json)) initialState = json;
+// for Hot Modules Reloading when model definitions change
+
+let wishList = WishList.create(initialState);
+
+function renderApp() {
+    ReactDOM.render(<App wishList={wishList} />, document.getElementById('root'));
 }
 
-const wishList = WishList.create(initialState);
+renderApp();
 
-onSnapshot(wishList, snapshot => {
-    localStorage.setItem('wishlistapp', JSON.stringify(snapshot));
-});
+if (module.hot) {
+    module.hot.accept(['./components/App'], () => {
+        // new components
+        renderApp();
+    })
 
-ReactDOM.render(<App wishList={wishList} />, document.getElementById('root'));
+    module.hot.accept(['./models/WishList'], () => {
+        // new model definitions
+        const snapshot = getSnapshot(wishList);
+        // initial wishList with the new defenition of WishList model (which injected by webpack) based on the old snapshot
+        wishList = WishList.create(snapshot);
+        renderApp();
+    })
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -29,7 +29,7 @@ export const WishList = types
     })
     .views(self => ({
         get totalPrice() {
-            return self.items.reduce((sum, entry) => sum + entry.price, 0);
+            return self.items.reduce((sum, entry) => sum + entry.price, 0) // /* hot reloading example  => */ * 1.2;
         }
     }))
     .actions(self => ({

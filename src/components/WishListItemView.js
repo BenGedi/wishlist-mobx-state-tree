@@ -56,7 +56,7 @@ class WishListItemView extends Component {
                 <h3>{item.name}</h3>
 
                 <span>
-                {item.price} <button onClick={this.onToggleEdit}>
+                {item.price}$<button onClick={this.onToggleEdit}>
                     <span role="img" aria-label="edit">✏️</span>
                 </button>
                 <button onClick={item.remove}>
