@@ -41,6 +41,11 @@ let initialState = {
 
 let group = Group.create(initialState);
 
+addMiddleware(group, (call, next) => {
+    console.log(`[${call.type}] ${call.name}`);
+    return next(call);
+});
+
 function renderApp() {
     ReactDOM.render(<App group={group} />, document.getElementById('root'));
 }
