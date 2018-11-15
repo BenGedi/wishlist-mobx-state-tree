@@ -33,7 +33,7 @@ body {
 }
 
 .list ul {
-    padding-left: 20px;
+    padding-left: 0;
 }
 
 .item {
@@ -97,7 +97,7 @@ body {
 
 .text-field span {
     margin-right: 7px;
-    width: 40px;
+    width: 50px;
     align-self: initial;
 }
 

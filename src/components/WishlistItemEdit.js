@@ -26,7 +26,7 @@ class WishListItemEdit extends Component {
                     <span>Price:</span><input value={item.price} onChange={this.onPriceChange}/>
                 </div>
                 <div className="text-field">
-                    <span>Image:</span><input value={item.image} onChange={this.onNameChange}/>
+                    <span>Image:</span><input value={item.image} onChange={this.onImageChange}/>
                 </div>
             </div>
         );
