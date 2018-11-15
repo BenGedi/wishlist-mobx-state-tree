@@ -4,27 +4,42 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import './assets/index.css';
 
-import { WishList } from './models/WishList';
+import { Group } from './models/Group';
 import { getSnapshot } from 'mobx-state-tree';
 
 let initialState = {
-    items: [
-        {
-            name: 'Lego Mindstorms EV3',
-            price: 349.95,
-            image: 'https://expressbuy.eu/media/products/3525d4d8aadb00624ee2c877812fa6f7/images/thumbnail/large_lego-31313-mindstorms-ev3.png?lm=1484739064'
+    users: {
+        'a342': {
+            id: 'a342',
+            name: 'Homer',
+            gender: 'm'
         },
-        {
-            name: 'Miracles - C.S Lewis',
-            price: 12.91,
-            image: 'https://images-na.ssl-images-amazon.com/images/I/51a7xaMpneL._SX329_BO1,204,203,200_.jpg'
-        }
-    ]
+        '5fc2': {
+            id: '5fc2',
+            name: 'Marge',
+            gender: 'f'
+        },
+        '663b': {
+            id: '663b',
+            name: 'Bart',
+            gender: 'm'
+        },
+        '65aa': {
+            id: '65aa',
+            name: 'Maggie',
+            gender: 'f'
+        },
+        'ba32': {
+            id: 'ba32',
+            name: 'Lisa',
+            gender: 'f'
+        },
+    }
 };
 
 // for Hot Modules Reloading when model definitions change
 
-let wishList = WishList.create(initialState);
+let wishList = Group.create(initialState);
 
 function renderApp() {
     ReactDOM.render(<App wishList={wishList} />, document.getElementById('root'));
@@ -42,7 +57,7 @@ if (module.hot) {
         // new model definitions
         const snapshot = getSnapshot(wishList);
         // initial wishList with the new defenition of WishList model (which injected by webpack) based on the old snapshot
-        wishList = WishList.create(snapshot);
+        wishList = Group.create(snapshot);
         renderApp();
     })
 }
