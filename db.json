@@ -1,0 +1,26 @@
+{
+    "suggestions_f": [
+        {
+            "name": "The Notebook",
+            "price": 10.31,
+            "image": "http://icons.iconarchive.com/icons/firstline1/movie-mega-pack-3/256/The-Notebook-icon.png"
+        },
+        {
+            "name": "LEGO Mindstorms EV3",
+            "price": 349.95,
+            "image": "http://www.brickshelf.com/gallery/grogall/31313/thumb/e_31313_detail_3.jpg_thumb.jpg"
+        }
+    ],
+    "suggestions_m": [
+        {
+            "name": "Machine Gun Preacher",
+            "price": 7.35,
+            "image": "http://icons.iconarchive.com/icons/firstline1/movie-mega-pack-2/256/Machine-Gun-Preacher-icon.png"
+        },
+        {
+            "name": "LEGO Mindstorms EV3",
+            "price": 349.95,
+            "image": "http://www.brickshelf.com/gallery/grogall/31313/thumb/e_31313_detail_3.jpg_thumb.jpg"
+        }
+    ]
+}
