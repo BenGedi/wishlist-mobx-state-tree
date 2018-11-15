@@ -8,7 +8,7 @@ const User = types.model({
     wishList: types.optional(WishList, {}),
 })
 .actions(self => ({
-    getSuggestions: flow(function * () {
+    getSuggestions: flow(function*() {
         const response = yield window.fetch(`http://localhost:3001/suggestions_${self.gender}`);
         const suggestions = yield response.json();
         
