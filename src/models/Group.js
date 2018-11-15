@@ -8,16 +8,10 @@ const User = types.model({
     wishList: types.optional(WishList, {}),
 })
 .actions(self => ({
-    getSuggestions() {
-        window.fetch(`http://localhost:3001/suggestions_${self.gender}`)
-            .then(response => response.json())
-            .then(suggestions => {
-                // will not work because this is an async prosses and self is will not be in the right context will the then will complete
-                // self.wishList.items.push(...suggestions);
-                
-                // an action will fix this issue
-                self.addSuggestions(suggestions);
-            })
+    async getSuggestions() {
+        const response = await window.fetch(`http://localhost:3001/suggestions_${self.gender}`);
+        const suggestions = await response.json();
+        self.addSuggestions(suggestions);
     },
     addSuggestions(suggestions) {
         self.wishList.items.push(...suggestions);
