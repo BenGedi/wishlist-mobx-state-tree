@@ -21,6 +21,10 @@ export const Group = types.model({
     users: types.map(User),
 })
 .actions(self => ({
+    // afterCreate: mobx build-in life cycle hook - it will be invoke when an instance is created and the entire object is setup
+    afterCreate() {
+        self.load();
+    },
     load: flow(function* load() {
         const response = yield window.fetch(`http://localhost:3001/users`);
         // applySnapshot: compare the state it already has with the state it received, and try to update it with a few changes as possible

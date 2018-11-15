@@ -12,7 +12,6 @@ let initialState = { users: {} };
 // for Hot Modules Reloading when model definitions change
 
 let group = (window.group = Group.create(initialState));
-group.load();
 
 addMiddleware(group, (call, next) => {
     console.log(`[${call.type}] ${call.name}`);
