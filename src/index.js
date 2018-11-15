@@ -7,39 +7,12 @@ import './assets/index.css';
 import { Group } from './models/Group';
 import { getSnapshot, addMiddleware } from 'mobx-state-tree';
 
-let initialState = {
-    users: {
-        'a342': {
-            id: 'a342',
-            name: 'Homer',
-            gender: 'm'
-        },
-        '5fc2': {
-            id: '5fc2',
-            name: 'Marge',
-            gender: 'f'
-        },
-        '663b': {
-            id: '663b',
-            name: 'Bart',
-            gender: 'm'
-        },
-        '65aa': {
-            id: '65aa',
-            name: 'Maggie',
-            gender: 'f'
-        },
-        'ba32': {
-            id: 'ba32',
-            name: 'Lisa',
-            gender: 'f'
-        },
-    }
-};
+let initialState = { users: {} };
 
 // for Hot Modules Reloading when model definitions change
 
-let group = Group.create(initialState);
+let group = (window.group = Group.create(initialState));
+group.load();
 
 addMiddleware(group, (call, next) => {
     console.log(`[${call.type}] ${call.name}`);
@@ -62,7 +35,7 @@ if (module.hot) {
         // new model definitions
         const snapshot = getSnapshot(group);
         // initial wishList with the new defenition of WishList model (which injected by webpack) based on the old snapshot
-        group = Group.create(snapshot);
+        group = window.group = Group.create(snapshot);
         renderApp();
     })
 }

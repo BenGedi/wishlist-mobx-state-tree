@@ -7,6 +7,7 @@ body {
 .App {
     max-width: 457px;
     text-align: center;
+    font-family: 'Viga', sans-serif;
     margin: auto;
 }
 
@@ -29,7 +30,6 @@ body {
 
 .list {
     text-align: center;
-    font-family: 'Viga', sans-serif;
 }
 
 .list ul {

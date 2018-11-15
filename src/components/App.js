@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
+import { observer } from "mobx-react";
 import logo from '../assets/santa-claus.png';
-import { toJS } from 'mobx';
 
 import WishListView from './WishListView';
 
 class App extends Component {
-	constructor(props) {
-		super();
-
-		this.state = {
-			selectedUser: null
-		}
+	state = {
+		selectedUser: null
 	}
 
 	onSelectUser = event => {
@@ -18,9 +14,9 @@ class App extends Component {
 	}
 
 	render() {
-		const group = this.props.group;
+		const {group} = this.props;
 		const selectedUser = group.users.get(this.state.selectedUser);
-		const users = Object.values(toJS(group).users);
+		const users = Array.from(group.users.values())
 
 		return (
 			<div className="App">
@@ -36,11 +32,20 @@ class App extends Component {
 						</option>
 					)}
 				</select>
-				{selectedUser && <WishListView wishList={selectedUser.wishList} />}
-				{selectedUser && <button onClick={selectedUser.getSuggestions}>Suggestion</button> }
+				<button onClick={group.drawLots}>Draw lots</button>
+                {selectedUser && <User user={selectedUser} />}
 			</div>
 		);
 	}
 }
 
-export default App;
+const User = observer(({ user }) => (
+    <div>
+        <WishListView wishList={user.wishList} />
+        <button onClick={user.getSuggestions}>Suggestions</button>
+        <hr />
+        <h2>{user.recipient ? user.recipient.name : ""}</h2>
+        {user.recipient && <WishListView wishList={user.recipient.wishList} readonly />}
+    </div>
+))
+export default observer(App);

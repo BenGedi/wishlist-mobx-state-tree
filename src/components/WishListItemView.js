@@ -36,8 +36,9 @@ class WishListItemView extends Component {
     }
 
     render () {
-        const { item } = this.props;
+        const { item, readonly } = this.props;
         const classNameEdit = this.state.isEditing && 'edit-mode';
+        
         return this.state.isEditing ? (
             <li className={`item ${classNameEdit}`}>
                 <WishListItemEdit item={this.state.clone} />
@@ -54,15 +55,17 @@ class WishListItemView extends Component {
             <li className="item">
                 {item.image && <div className="item-image"><img src={item.image} alt={item.name}/></div>}
                 <h3>{item.name}</h3>
-
-                <span>
-                {item.price}$<button onClick={this.onToggleEdit}>
-                    <span role="img" aria-label="edit">✏️</span>
-                </button>
-                <button onClick={item.remove}>
-                        <span role="img" aria-label="cancel">❌</span>
-                    </button>
-                </span>
+                <span>{item.price}$</span>
+                { !readonly && (
+                    <span>
+                        <button onClick={this.onToggleEdit}>
+                            <span role="img" aria-label="edit">✏️</span>
+                        </button>
+                        <button onClick={item.remove}>
+                                <span role="img" aria-label="cancel">❌</span>
+                        </button>
+                    </span>
+                )}
             </li>
         );
     }

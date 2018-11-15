@@ -22,5 +22,60 @@
             "price": 349.95,
             "image": "http://www.brickshelf.com/gallery/grogall/31313/thumb/e_31313_detail_3.jpg_thumb.jpg"
         }
-    ]
+    ],
+    "users":{
+        "a342": {
+            "id":"a342",
+            "name":"Homer",
+            "gender":"m",
+            "wishList": {
+                "items":[
+                    {
+                        "name":"The Notebook",
+                        "price":10.31,"image":"http://icons.iconarchive.com/icons/firstline1/movie-mega-pack-3/256/The-Notebook-icon.png"
+                    },
+                    {
+                        "name":"LEGO Mindstorms EV3",
+                        "price":349.95,"image":"http://www.brickshelf.com/gallery/grogall/31313/thumb/e_31313_detail_3.jpg_thumb.jpg"
+                    }
+                ]},
+                "recipient":"65aa"
+        },
+        "5fc2": {
+            "id":"5fc2",
+            "name":"Marge",
+            "gender":"f",
+            "wishList": {
+                "items": []
+            },
+            "recipient":"ba32"
+        },
+        "663b": {
+            "id": "663b",
+            "name":"Bart",
+            "gender":"m",
+            "wishList": {
+                "items":[]
+            },
+            "recipient": "5fc2"
+        },
+        "65aa": {
+            "id":"65aa",
+            "name":"Maggie",
+            "gender":"f",
+            "wishList": {
+                "items":[]
+            },
+            "recipient": "a342"
+        },
+        "ba32": {
+            "id":"ba32",
+            "name":"Lisa",
+            "gender":"f",
+            "wishList": {
+                "items":[]
+            },
+            "recipient":"663b"
+        }
+    }
 }
