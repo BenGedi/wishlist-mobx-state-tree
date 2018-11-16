@@ -24,6 +24,7 @@ class App extends Component {
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">WishList</h1>
 				</header>
+				<button onClick={group.reload}>Reload</button>
 				<select onChange={this.onSelectUser}>
 					<option>- Select user -</option>
 					{users.map(user =>

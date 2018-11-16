@@ -20,16 +20,35 @@ const User = types.model({
 export const Group = types.model({
     users: types.map(User),
 })
-.actions(self => ({
+.actions(self => {
+    let controller;
+
+    return {
     // afterCreate: mobx build-in life cycle hook - it will be invoke when an instance is created and the entire object is setup
     afterCreate() {
         self.load();
     },
     load: flow(function* load() {
-        const response = yield window.fetch(`http://localhost:3001/users`);
-        // applySnapshot: compare the state it already has with the state it received, and try to update it with a few changes as possible
-        applySnapshot(self.users, yield response.json());
+        controller = window.AbortController && new window.AbortController();
+        try {
+            const response = yield window.fetch(
+                `http://localhost:3001/users`,
+                { signal: controller && controller.signal }
+            );
+            // applySnapshot: compare the state it already has with the state it received, and try to update it with a few changes as possible
+            applySnapshot(self.users, yield response.json());
+            console.log('success');
+        } catch(e) {
+            console.log('aborted',e.name);
+        }
     }),
+    reload() {
+        if (controller) controller.abort();
+        self.load();
+    },
+    beforeDestroy() {
+        if (controller) controller.abort();
+    },
     drawLots() {
         const allUsers = Array.from(self.users.values())
 
@@ -61,4 +80,4 @@ export const Group = types.model({
                 }
         })
     }
-}))
+}})
